@@ -1,0 +1,16 @@
+<mvc:View
+  controllerName="semantic.forge.ui5.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  displayBlock="true"
+>
+  <App id="app">
+    <pages>
+      <Page title="SemanticForge">
+        <content>
+          <Text text="SemanticForge — OpenUI5 application shell (Phase 1 scaffold)" />
+        </content>
+      </Page>
+    </pages>
+  </App>
+</mvc:View>

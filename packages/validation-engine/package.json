@@ -1,0 +1,10 @@
+{
+  "name": "@semantic-forge/validation-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic validation rules (scaffold)",
+  "scripts": {
+    "build": "echo \"validation-engine build — PR2\""
+  }
+}

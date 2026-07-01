@@ -1,0 +1,41 @@
+{
+  "name": "semantic-forge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Semantic model workbench — OpenUI5, SAP CAP, OData V4",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*",
+    "app/*"
+  ],
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "build": "cds build --production"
+  },
+  "dependencies": {
+    "@cap-js/sqlite": "^2",
+    "@sap/cds": "^9.9"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.6",
+    "@sap/cds-dk": "^9.9",
+    "@types/node": "^22",
+    "tsx": "^4",
+    "typescript": "^5"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": "db.sqlite"
+        }
+      }
+    }
+  }
+}

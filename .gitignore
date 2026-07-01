@@ -26,5 +26,10 @@ resources/
 # TypeScript
 *.tsbuildinfo
 
+packages/*/dist/
+
+# TypeScript
+*.tsbuildinfo
+
 # Optional local AI
 .ollama/
