@@ -3,8 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Deterministic validation rules (scaffold)",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "build": "echo \"validation-engine build — PR2\""
+    "build": "tsc -p tsconfig.json",
+    "test": "node --import tsx --test test/**/*.test.ts"
+  },
+  "dependencies": {
+    "@semantic-forge/contracts": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5"
   }
 }

@@ -13,13 +13,18 @@
     "app/*"
   ],
   "scripts": {
+    "build:packages": "npm run build -w @semantic-forge/contracts -w @semantic-forge/domain -w @semantic-forge/validation-engine",
     "start": "cds-serve",
     "watch": "cds watch",
-    "build": "cds build --production"
+    "build": "npm run build:packages && cds build --production",
+    "test:domain": "npm run test --workspace=@semantic-forge/domain && npm run test --workspace=@semantic-forge/validation-engine"
   },
   "dependencies": {
     "@cap-js/sqlite": "^2",
-    "@sap/cds": "^9.9"
+    "@sap/cds": "^9.9",
+    "@semantic-forge/contracts": "*",
+    "@semantic-forge/domain": "*",
+    "@semantic-forge/validation-engine": "*"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.6",
