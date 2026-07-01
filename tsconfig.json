@@ -12,5 +12,5 @@
     "sourceMap": true,
     "types": ["@cap-js/cds-types"]
   },
-  "include": ["srv/**/*"]
+  "include": ["srv/**/*", "test/**/*"]
 }

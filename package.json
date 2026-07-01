@@ -17,7 +17,9 @@
     "start": "cds-serve",
     "watch": "cds watch",
     "build": "npm run build:packages && cds build --production",
-    "test:domain": "npm run test --workspace=@semantic-forge/domain && npm run test --workspace=@semantic-forge/validation-engine"
+    "test:domain": "npm run test --workspace=@semantic-forge/domain && npm run test --workspace=@semantic-forge/validation-engine",
+    "test:integration": "cds deploy --to sqlite && node --import tsx --test test/integration/**/*.test.ts",
+    "test": "npm run build:packages && npm run test:domain && npm run test:integration"
   },
   "dependencies": {
     "@cap-js/sqlite": "^2",
@@ -27,6 +29,7 @@
     "@semantic-forge/validation-engine": "*"
   },
   "devDependencies": {
+    "@cap-js/cds-test": "^0.4",
     "@cap-js/cds-types": "^0.6",
     "@sap/cds-dk": "^9.9",
     "@types/node": "^22",

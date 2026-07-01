@@ -67,21 +67,14 @@ Do not merge persisted and dirty draft state into a single model.
 
 ## Validation
 
-TBD until Part 2 (first vertical slice). Expected commands:
-
 ```bash
-# Domain packages
+npm run build:packages
 npm run test:domain
-
-# CAP
-cds build && npm run test:integration
-
-# UI5
-cd app/semantic-forge-ui5 && npm run lint && npm run test
-
-# E2E
-npm run test:e2e
+npm run test:integration
+npx cds build
 ```
+
+UI5 and E2E commands will be added when those layers land (Phases 1 PR4+ and Phase 10).
 
 ## Further reading
 
