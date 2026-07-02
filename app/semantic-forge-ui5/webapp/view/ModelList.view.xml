@@ -1,0 +1,49 @@
+<mvc:View
+  controllerName="semantic.forge.ui5.controller.ModelList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <Page id="modelListPage" title="{i18n>modelListTitle}">
+    <content>
+      <Table
+        id="modelsTable"
+        items="{/Models}"
+        growing="true"
+        growingScrollToLoad="true"
+        mode="SingleSelectMaster"
+        selectionChange="onSelectionChange"
+        noDataText="{i18n>emptyModels}">
+        <headerToolbar>
+          <OverflowToolbar>
+            <Title text="{i18n>modelListTitle}" level="H2" />
+            <ToolbarSpacer />
+            <Button text="{i18n>retry}" press="onRetryPress" visible="{= !!${view>/error} }" />
+          </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+          <Column><Text text="{i18n>colName}" /></Column>
+          <Column><Text text="{i18n>colStatus}" /></Column>
+          <Column><Text text="{i18n>colRevision}" /></Column>
+          <Column><Text text="{i18n>colPublishedVersion}" /></Column>
+          <Column><Text text="{i18n>colModifiedAt}" /></Column>
+        </columns>
+        <items>
+          <ColumnListItem type="Navigation">
+            <cells>
+              <Text text="{name}" />
+              <ObjectStatus text="{status}" />
+              <Text text="{revision}" />
+              <Text text="{publishedVersionNumber}" />
+              <Text text="{modifiedAt}" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+      <MessageStrip
+        text="{view>/error}"
+        type="Error"
+        showIcon="true"
+        visible="{= !!${view>/error} }"
+        class="sapUiSmallMargin" />
+    </content>
+  </Page>
+</mvc:View>

@@ -1,0 +1,16 @@
+<mvc:View
+  controllerName="semantic.forge.ui5.controller.ModelEditor"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+  <Page
+    id="modelEditorPage"
+    title="{i18n>modelEditorTitle}"
+    showNavButton="true"
+    navButtonPress="onNavBack">
+    <content>
+      <Text
+        text="{i18n>editorPlaceholder}"
+        class="sapUiSmallMargin" />
+    </content>
+  </Page>
+</mvc:View>

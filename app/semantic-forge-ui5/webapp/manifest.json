@@ -3,10 +3,20 @@
   "sap.app": {
     "id": "semantic.forge.ui5",
     "type": "application",
-    "title": "SemanticForge",
-    "description": "Semantic model workbench",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
     "applicationVersion": {
       "version": "0.1.0"
+    },
+    "dataSources": {
+      "modelService": {
+        "uri": "/odata/v4/model/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -29,6 +39,61 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "semantic.forge.ui5.i18n.i18n",
+          "supportedLocales": ["en"],
+          "fallbackLocale": "en"
+        }
+      },
+      "": {
+        "dataSource": "modelService",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "semantic.forge.ui5.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "bypassed": {
+          "target": "models"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "models",
+          "target": "models"
+        },
+        {
+          "pattern": "model/{modelId}",
+          "name": "modelEditor",
+          "target": "modelEditor"
+        }
+      ],
+      "targets": {
+        "models": {
+          "viewName": "ModelList",
+          "viewId": "modelList"
+        },
+        "modelEditor": {
+          "viewName": "ModelEditor",
+          "viewId": "modelEditor"
+        }
       }
     }
   }
