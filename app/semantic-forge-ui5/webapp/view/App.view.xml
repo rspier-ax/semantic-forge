@@ -3,14 +3,6 @@
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   displayBlock="true"
->
-  <App id="app">
-    <pages>
-      <Page title="SemanticForge">
-        <content>
-          <Text text="SemanticForge — OpenUI5 application shell (Phase 1 scaffold)" />
-        </content>
-      </Page>
-    </pages>
-  </App>
+  height="100%">
+  <App id="app" busy="{ui>/busy}" />
 </mvc:View>
