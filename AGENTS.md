@@ -24,7 +24,7 @@ Planned workflow: create workspace → import schema → model facts/dimensions/
 | CAP tests | @cap-js/cds-test |
 | E2E | Cypress |
 
-Node.js **24**. CAP **^10**. UI5 CLI **^4.0** (stable). Types: **@openui5/types**.
+Node.js **22+** (24 recommended). CAP **^9.9**. UI5 CLI **^4.0** (stable). Types: **@openui5/types**.
 
 ## Planned structure
 
@@ -68,13 +68,20 @@ Do not merge persisted and dirty draft state into a single model.
 ## Validation
 
 ```bash
+npm install
 npm run build:packages
+npx cds deploy --to sqlite
+
 npm run test:domain
 npm run test:integration
+npm test
 npx cds build
+npm run build --workspace=@semantic-forge/ui5
+
+./scripts/dev.sh
 ```
 
-UI5 and E2E commands will be added when those layers land (Phases 1 PR4+ and Phase 10).
+E2E (Cypress) is planned for Phase 10.
 
 ## Further reading
 

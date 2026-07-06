@@ -46,7 +46,36 @@ See [docs/README.md](./docs/README.md) for architecture notes, ADRs, and the imp
 | CAP tests | @cap-js/cds-test |
 | E2E | Cypress |
 
-Runtime target: **Node.js 24**. CAP **^10**, UI5 CLI **^4.0** (stable).
+Runtime target: **Node.js 22+** (24 recommended). CAP **^9.9**, UI5 CLI **^4.0** (stable).
+
+## Run locally
+
+**Prerequisites:** Node.js 22+, npm 10+
+
+```bash
+npm install
+npm run build:packages
+npx cds deploy --to sqlite
+./scripts/dev.sh
+```
+
+| URL | Purpose |
+|-----|---------|
+| http://localhost:8081/index.html | OpenUI5 app (model list and editor) |
+| http://localhost:4004/odata/v4/model/ | CAP OData V4 service |
+
+### Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run build:packages` | Compile pure TypeScript domain packages |
+| `npm run test:domain` | Domain and validation-engine tests |
+| `npm run test:integration` | CAP integration tests |
+| `npm test` | Full test suite |
+| `npm run watch` | CAP only on port 4004 |
+| `./scripts/dev.sh` | CAP + UI5 in parallel |
+
+Seed data includes **Sales Analytics** (valid, published v1) and **Incomplete Draft** (MODEL-001 demo).
 
 ## Language
 
@@ -62,8 +91,6 @@ The entire project is **English-only** — documentation, UI, code, comments, te
 | [docs/decisions/](./docs/decisions/) | Architecture Decision Records |
 | [docs/guides/implementation-roadmap.md](./docs/guides/implementation-roadmap.md) | Phases and milestones |
 | [AGENTS.md](./AGENTS.md) | Agent and contributor entry point |
-
-Implementation has not started yet. Run instructions will be added when the first vertical slice lands.
 
 ## License
 
