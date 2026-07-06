@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Table
+    items="{editor>/validationIssues}"
+    noDataText="{i18n>emptyIssues}">
+    <columns>
+      <Column><Text text="{i18n>colRule}" /></Column>
+      <Column><Text text="{i18n>colSeverity}" /></Column>
+      <Column><Text text="{i18n>colLocation}" /></Column>
+      <Column><Text text="{i18n>colMessage}" /></Column>
+    </columns>
+    <items>
+      <ColumnListItem>
+        <cells>
+          <Text text="{editor>ruleId}" />
+          <ObjectStatus
+            text="{editor>severity}"
+            state="{= ${editor>severity} === 'error' ? 'Error' : (${editor>severity} === 'warning' ? 'Warning' : 'Information') }" />
+          <Text text="{editor>location}" />
+          <Text text="{editor>message}" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </Table>
+</core:FragmentDefinition>

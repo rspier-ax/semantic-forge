@@ -1,0 +1,30 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+  <Table
+    items="{
+      path: '/ModelVersions',
+      filters: [{
+        path: 'model_ID',
+        operator: 'EQ',
+        value1: '{editor>/modelId}'
+      }],
+      sorter: { path: 'versionNumber', descending: true }
+    }"
+    noDataText="{i18n>emptyVersions}">
+    <columns>
+      <Column><Text text="{i18n>colVersion}" /></Column>
+      <Column><Text text="{i18n>colChecksum}" /></Column>
+      <Column><Text text="{i18n>colPublishedAt}" /></Column>
+    </columns>
+    <items>
+      <ColumnListItem>
+        <cells>
+          <Text text="{versionNumber}" />
+          <Text text="{checksum}" />
+          <Text text="{publishedAt}" />
+        </cells>
+      </ColumnListItem>
+    </items>
+  </Table>
+</core:FragmentDefinition>

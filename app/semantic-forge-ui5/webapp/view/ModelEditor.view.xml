@@ -1,15 +1,18 @@
 <mvc:View
   controllerName="semantic.forge.ui5.controller.ModelEditor"
   xmlns:mvc="sap.ui.core.mvc"
-  xmlns="sap.m">
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
   <Page
     id="modelEditorPage"
     title="{i18n>modelEditorTitle}"
     showNavButton="true"
     navButtonPress="onNavBack"
-    busy="{= ${editor>/loading} || ${editor>/saving} }">
+    busy="{= ${editor>/loading} || ${editor>/saving} || ${editor>/validating} || ${editor>/publishing} }">
     <headerContent>
       <Button text="{i18n>btnSave}" type="Emphasized" press="onSavePress" enabled="{editor>/dirty}" />
+      <Button text="{i18n>btnValidate}" press="onValidatePress" />
+      <Button text="{i18n>btnPublish}" press="onPublishPress" />
       <Button text="{i18n>btnReload}" press="onReloadPress" />
     </headerContent>
     <content>
@@ -23,6 +26,20 @@
         <Label text="{i18n>fieldRevision}" class="sapUiTinyMarginTop" />
         <Text text="{editor>/revision}" />
       </VBox>
+
+      <IconTabBar id="editorTabs" select="onTabSelect" class="sapUiResponsivePadding">
+        <items>
+          <IconTabFilter text="{i18n>panelValidation}" key="validation">
+            <core:Fragment fragmentName="semantic.forge.ui5.fragment.ValidationPanel" type="XML" />
+          </IconTabFilter>
+          <IconTabFilter text="{i18n>panelVersions}" key="versions">
+            <core:Fragment fragmentName="semantic.forge.ui5.fragment.VersionHistory" type="XML" />
+          </IconTabFilter>
+          <IconTabFilter text="{i18n>panelAudit}" key="audit">
+            <core:Fragment fragmentName="semantic.forge.ui5.fragment.AuditHistory" type="XML" />
+          </IconTabFilter>
+        </items>
+      </IconTabBar>
     </content>
   </Page>
 </mvc:View>
