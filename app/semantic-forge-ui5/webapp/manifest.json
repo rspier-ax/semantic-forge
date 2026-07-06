@@ -58,6 +58,10 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "ui": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/ui-state.json"
       }
     },
     "routing": {

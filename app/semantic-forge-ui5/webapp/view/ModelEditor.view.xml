@@ -6,11 +6,23 @@
     id="modelEditorPage"
     title="{i18n>modelEditorTitle}"
     showNavButton="true"
-    navButtonPress="onNavBack">
+    navButtonPress="onNavBack"
+    busy="{= ${editor>/loading} || ${editor>/saving} }">
+    <headerContent>
+      <Button text="{i18n>btnSave}" type="Emphasized" press="onSavePress" enabled="{editor>/dirty}" />
+      <Button text="{i18n>btnReload}" press="onReloadPress" />
+    </headerContent>
     <content>
-      <Text
-        text="{i18n>editorPlaceholder}"
-        class="sapUiSmallMargin" />
+      <VBox class="sapUiSmallMargin">
+        <Label text="{i18n>fieldName}" labelFor="modelNameInput" />
+        <Input
+          id="modelNameInput"
+          value="{editor>/draft/metadata/name}"
+          change="onNameChange"
+          width="100%" />
+        <Label text="{i18n>fieldRevision}" class="sapUiTinyMarginTop" />
+        <Text text="{editor>/revision}" />
+      </VBox>
     </content>
   </Page>
 </mvc:View>
