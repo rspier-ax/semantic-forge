@@ -8,6 +8,9 @@ import type Dialog from 'sap/m/Dialog';
 import type { Input$ChangeEvent } from 'sap/m/Input';
 import type { IconTabBar$SelectEvent } from 'sap/m/IconTabBar';
 import type { Route$PatternMatchedEvent } from 'sap/ui/core/routing/Route';
+import type Table from 'sap/m/Table';
+import Filter from 'sap/ui/model/Filter';
+import FilterOperator from 'sap/ui/model/FilterOperator';
 import EditorService from '../service/EditorService';
 
 const emptyDraft = {
@@ -28,7 +31,8 @@ export default class ModelEditor extends Controller {
   private publishDialog?: Dialog;
 
   onInit(): void {
-    this.setModel(
+    const view = this.getView();
+    view?.setModel(
       new JSONModel({
         modelId: '',
         revision: 0,
@@ -44,7 +48,7 @@ export default class ModelEditor extends Controller {
       }),
       'editor',
     );
-    this.setModel(new JSONModel({ comment: '' }), 'publish');
+    view?.setModel(new JSONModel({ comment: '' }), 'publish');
 
     const router = (this.getOwnerComponent() as UIComponent).getRouter();
     router.getRoute('modelEditor')?.attachPatternMatched(this.onRouteMatched, this);
@@ -63,6 +67,13 @@ export default class ModelEditor extends Controller {
   private async onRouteMatched(event: Route$PatternMatchedEvent): Promise<void> {
     const modelId = event.getParameter('arguments')?.modelId as string;
     await this.getEditorService().loadModel(modelId);
+    this.applyModelFilters(modelId);
+  }
+
+  private applyModelFilters(modelId: string): void {
+    const filter = new Filter('model_ID', FilterOperator.EQ, modelId);
+    (this.byId('auditTable') as Table | undefined)?.getBinding('items')?.filter([filter]);
+    (this.byId('versionTable') as Table | undefined)?.getBinding('items')?.filter([filter]);
   }
 
   onNavBack(): void {

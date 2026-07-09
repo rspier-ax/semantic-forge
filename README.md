@@ -50,19 +50,16 @@ Runtime target: **Node.js 22+** (24 recommended). CAP **^9.9**, UI5 CLI **^4.0**
 
 ## Run locally
 
-**Prerequisites:** Node.js 22+, npm 10+
-
 ```bash
 npm install
-npm run build:packages
-npx cds deploy --to sqlite
-./scripts/dev.sh
+npm run dev
 ```
 
-| URL | Purpose |
-|-----|---------|
-| http://localhost:8081/index.html | OpenUI5 app (model list and editor) |
-| http://localhost:4004/odata/v4/model/ | CAP OData V4 service |
+When the server is up, open:
+
+**http://localhost:4004/semantic-forge-ui5/dist/index.html**
+
+Use `dist`, not `webapp` — the built app includes OpenUI5 and compiled TypeScript.
 
 ### Scripts
 

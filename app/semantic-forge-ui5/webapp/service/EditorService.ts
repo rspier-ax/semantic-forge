@@ -121,13 +121,18 @@ export default class EditorService {
       const binding = this.odataModel.bindContext(
         `/Models(${state.modelId})`,
         undefined,
-        { $$updateGroupId: '$direct' },
+        { $$updateGroupId: 'saveGroup' },
       );
+      await binding.requestObject();
       const context = binding.getBoundContext();
-      context?.setProperty('revision', state.revision);
-      context?.setProperty('name', state.draft.metadata.name);
-      context?.setProperty('draftContent', JSON.stringify(state.draft));
-      await binding.execute('$direct');
+      if (!context) {
+        throw new Error('Model context not available');
+      }
+
+      context.setProperty('revision', state.revision);
+      context.setProperty('name', state.draft.metadata.name);
+      context.setProperty('draftContent', JSON.stringify(state.draft));
+      await this.odataModel.submitBatch('saveGroup');
 
       const updated = binding.getBoundContext()?.getObject() as {
         revision: number;
@@ -153,10 +158,10 @@ export default class EditorService {
     const state = this.editorModel.getData() as EditorState;
     this.editorModel.setProperty('/validating', true);
     try {
-      const binding = this.odataModel.bindContext(
-        `/validateModel(modelId=${state.modelId},revision=${state.revision})`,
-      ) as ODataContextBinding;
-      await binding.execute();
+      const binding = this.odataModel.bindContext('/validateModel(...)') as ODataContextBinding;
+      binding.setParameter('modelId', state.modelId);
+      binding.setParameter('revision', state.revision);
+      await binding.invoke();
       const result = binding.getBoundContext()?.getObject() as {
         issues?: ValidationIssue[];
       };
@@ -179,11 +184,11 @@ export default class EditorService {
     const state = this.editorModel.getData() as EditorState;
     this.editorModel.setProperty('/publishing', true);
     try {
-      const encodedComment = encodeURIComponent(comment.replace(/'/g, "''"));
-      const binding = this.odataModel.bindContext(
-        `/publishModel(modelId=${state.modelId},revision=${state.revision},comment='${encodedComment}')`,
-      ) as ODataContextBinding;
-      await binding.execute();
+      const binding = this.odataModel.bindContext('/publishModel(...)') as ODataContextBinding;
+      binding.setParameter('modelId', state.modelId);
+      binding.setParameter('revision', state.revision);
+      binding.setParameter('comment', comment);
+      await binding.invoke();
       const result = binding.getBoundContext()?.getObject() as {
         versionNumber?: number;
       };

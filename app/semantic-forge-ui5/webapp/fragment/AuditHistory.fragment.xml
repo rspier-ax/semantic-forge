@@ -2,13 +2,9 @@
   xmlns="sap.m"
   xmlns:core="sap.ui.core">
   <Table
+    id="auditTable"
     items="{
       path: '/AuditEvents',
-      filters: [{
-        path: 'model_ID',
-        operator: 'EQ',
-        value1: '{editor>/modelId}'
-      }],
       sorter: { path: 'createdAt', descending: true }
     }"
     growing="true"

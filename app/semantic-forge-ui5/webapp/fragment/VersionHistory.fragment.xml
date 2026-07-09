@@ -2,13 +2,9 @@
   xmlns="sap.m"
   xmlns:core="sap.ui.core">
   <Table
+    id="versionTable"
     items="{
       path: '/ModelVersions',
-      filters: [{
-        path: 'model_ID',
-        operator: 'EQ',
-        value1: '{editor>/modelId}'
-      }],
       sorter: { path: 'versionNumber', descending: true }
     }"
     noDataText="{i18n>emptyVersions}">
