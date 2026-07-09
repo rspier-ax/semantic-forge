@@ -15,10 +15,10 @@ interface ModelRow {
  */
 export default class ModelList extends Controller {
   onInit(): void {
-    this.setModel(new JSONModel({ error: '' }), 'view');
+    this.getView()?.setModel(new JSONModel({ error: '' }), 'view');
 
     const odataModel = this.getOwnerComponent()?.getModel() as ODataModel | undefined;
-    odataModel?.attachMetadataFailed(() => {
+    void odataModel?.getMetaModel().requestObject('/').catch(() => {
       this._setError(this._i18n().getText('loadModelsError'));
     });
   }
@@ -36,7 +36,7 @@ export default class ModelList extends Controller {
 
   onRetryPress(): void {
     const odataModel = this.getOwnerComponent()?.getModel() as ODataModel | undefined;
-    odataModel?.refresh(true);
+    odataModel?.refresh();
     this.getView()?.getModel('view')?.setProperty('/error', '');
   }
 

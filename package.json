@@ -17,6 +17,7 @@
     "start": "cds-serve",
     "watch": "cds watch",
     "build": "npm run build:packages && cds build --production",
+    "dev": "npm run build:packages && npx cds deploy --to sqlite && npm run build --workspace=@semantic-forge/ui5 && cds watch --port 4004",
     "test:domain": "npm run test --workspace=@semantic-forge/domain && npm run test --workspace=@semantic-forge/validation-engine",
     "test:integration": "cds deploy --to sqlite && node --import tsx --test test/integration/**/*.test.ts",
     "test": "npm run build:packages && npm run test:domain && npm run test:integration"
