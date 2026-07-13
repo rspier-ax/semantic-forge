@@ -4,7 +4,7 @@ Read **`docs/README.md`** for architecture, standards, and ADRs.
 
 ## Product
 
-**Semantic model workbench** for creating, validating, versioning, and publishing analytical models before production release. Demo data only — bundled sales sample dataset; no arbitrary database connections in the public demo.
+Demo workbench for creating, validating, versioning, and publishing analytical semantic models. Bundled sales sample dataset only — no arbitrary database connections.
 
 Planned workflow: create workspace → import schema → model facts/dimensions/measures → save draft → validate → compare with published version → analyze impact → publish immutable version → review audit history.
 

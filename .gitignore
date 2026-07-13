@@ -12,6 +12,8 @@ cypress/screenshots/
 # CAP / SAP
 gen/
 db.sqlite
+db.sqlite-shm
+db.sqlite-wal
 *.db
 .cdsrc-private.json
 default-env.json
