@@ -1,52 +1,31 @@
 # SemanticForge
 
-Semantic model workbench for designing, validating, versioning, and publishing analytical models before they reach production consumers.
+OpenUI5 + SAP CAP demo for editing, validating, and publishing analytical semantic models.
 
-> **Demonstration project.** Sample data sources, model names, and consumer references are fictional. This is not a production system and is not affiliated with SAP Datasphere or any analytics vendor.
+Sample data only (bundled sales dataset). Not a production system.
 
-## Problem we solve
+## Status
 
-Changes to analytical semantic models can produce incorrect metrics, ambiguous relationships, and breaks in downstream dashboards and APIs. SemanticForge identifies those problems **before** publication — through deterministic validation, version comparison, impact analysis, and governed publish workflows.
+**Phase 1 vertical slice** is working:
 
-## Key capabilities (planned)
+- List semantic models (OData V4)
+- Open a model, edit the name, save with optimistic revision
+- Run deterministic validation (MODEL-001)
+- Publish an immutable version
+- View version history and audit events
 
-- **Model editor** — classify entities as fact or dimension; define fields, semantic types, measures, relationships, and calculated measures.
-- **Deterministic validation** — extensible rule engine with structured issues (structure, semantics, relationships, measures, compatibility, governance).
-- **Versioning** — draft with optimistic concurrency; immutable published versions with checksums and audit trail.
-- **Diff and impact** — semantic comparison between draft and published versions; dependency graph for affected consumers.
-- **Safe preview** — parameterized query compilation against authorized sample datasets (no arbitrary SQL).
-- **Optional assistant** — rule-based explanations by default; local Ollama with Zod-validated structured output when configured.
+Roadmap for later phases: [docs/guides/implementation-roadmap.md](./docs/guides/implementation-roadmap.md).
 
-## Architecture
-
-```
-OpenUI5 App (TypeScript, XML Views)
-    ODataModel + Editor JSONModel + UI JSONModel
-    ↓ OData V4
-SAP CAP for Node.js (TypeScript, CDS)
-    Catalog | Modeling | Validation | Versioning | Diff | Impact | Preview | Audit | Assistant
-    ↓
-SQLite (dev) / PostgreSQL (optional)
-    Relational metadata + JSON model snapshots
-```
-
-Pure TypeScript domain packages (`packages/domain`, `validation-engine`, etc.) stay independent of CAP and UI5.
-
-See [docs/README.md](./docs/README.md) for architecture notes, ADRs, and the implementation roadmap.
-
-## Tech stack
+## Stack
 
 | Layer | Choice |
 |-------|--------|
-| Frontend | OpenUI5, TypeScript strict, XML Views, OData V4 model |
-| Backend | SAP CAP for Node.js, TypeScript, CDS, OData V4 |
-| Database | CDS schema; SQLite (dev); PostgreSQL optional |
-| Domain tests | Mocha + Chai |
-| UI5 tests | QUnit + OPA5 |
-| CAP tests | @cap-js/cds-test |
-| E2E | Cypress |
+| Frontend | OpenUI5, TypeScript, XML Views, OData V4 |
+| Backend | SAP CAP for Node.js, TypeScript, CDS |
+| Database | SQLite (dev); PostgreSQL optional |
+| Domain | Pure TypeScript packages (`packages/*`) |
 
-Runtime target: **Node.js 22+** (24 recommended). CAP **^9.9**, UI5 CLI **^4.0** (stable).
+Node.js **22+** (24 recommended). CAP **^9.9**, UI5 CLI **^4.0**.
 
 ## Run locally
 
@@ -72,11 +51,11 @@ Use `dist`, not `webapp` — the built app includes OpenUI5 and compiled TypeScr
 | `npm run watch` | CAP only on port 4004 |
 | `./scripts/dev.sh` | CAP + UI5 in parallel |
 
-Seed data includes **Sales Analytics** (valid, published v1) and **Incomplete Draft** (MODEL-001 demo).
+Seed data: **Sales Analytics** (valid, published v1) and **Incomplete Draft** (MODEL-001 demo).
 
 ## Language
 
-The entire project is **English-only** — documentation, UI, code, comments, tests, and API messages. No i18n.
+English-only — documentation, UI, code, comments, tests, and API messages.
 
 ## Documentation
 
